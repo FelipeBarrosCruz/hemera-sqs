@@ -1,0 +1,14 @@
+{
+  "extends": "standard",
+  "plugins": [
+    "standard"
+  ],
+  "rules": {
+    "camelcase": [
+      0
+    ]
+  },
+  "env": {
+    "es6": true
+  }
+}
