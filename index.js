@@ -1,8 +1,15 @@
 'use strict'
 
 const AWS = require('aws-sdk')
+const { Consumer } = require('sqs-consumer')
 const Hp = require('hemera-plugin')
 
+/**
+ *
+ * @param {Hemera} hemera
+ * @param {*} opts
+ * @param {*} done
+ */
 function hemeraSQS (hemera, opts, done) {
   const topic = 'sqs'
 
@@ -182,6 +189,20 @@ function hemeraSQS (hemera, opts, done) {
       })
     }
   )
+
+  hemera.decorate('sqs', sqs)
+
+  hemera.decorate('sqsListenQueue', (req) => {
+    const { queueUrl, handleMessage } = req
+    const app = Consumer.create({
+      queueUrl,
+      handleMessage,
+      sqs
+    })
+
+    app.start()
+    return app
+  })
 
   done()
 }
