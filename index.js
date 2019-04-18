@@ -23,12 +23,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'listQueues'
     },
     async (req) => {
-      sqs.listQueues(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return { queueUrls: data.QueueUrls }
+      return new Promise((resolve, reject) => {
+        sqs.listQueues(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve({ queueUrls: data.QueueUrls })
+        })
       })
     }
   )
@@ -39,12 +41,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'createQueue'
     },
     async (req) => {
-      sqs.createQueue(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return { queueUrl: data.QueueUrl }
+      return new Promise((resolve, reject) => {
+        sqs.createQueue(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve({ queueUrl: data.QueueUrl })
+        })
       })
     }
   )
@@ -55,12 +59,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'getQueueUrl'
     },
     async (req) => {
-      sqs.getQueueUrl(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return { queueUrl: data.QueueUrl }
+      return new Promise((resolve, reject) => {
+        sqs.getQueueUrl(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve({ queueUrl: data.QueueUrl })
+        })
       })
     }
   )
@@ -71,12 +77,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'deleteQueue'
     },
     async (req) => {
-      sqs.deleteQueue(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return data
+      return new Promise((resolve, reject) => {
+        sqs.deleteQueue(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve(data)
+        })
       })
     }
   )
@@ -87,12 +95,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'setQueueAttributes'
     },
     async (req) => {
-      sqs.setQueueAttributes(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return { queueUrls: data.QueueUrls }
+      return new Promise((resolve, reject) => {
+        sqs.setQueueAttributes(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve({ queueUrls: data.QueueUrls })
+        })
       })
     }
   )
@@ -107,12 +117,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'sendMessage'
     },
     async (req) => {
-      sqs.sendMessage(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return { id: data.MessageId }
+      return new Promise((resolve, reject) => {
+        sqs.sendMessage(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve({ id: data.MessageId })
+        })
       })
     }
   )
@@ -123,12 +135,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'receiveMessage'
     },
     async (req) => {
-      sqs.receiveMessage(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return data
+      return new Promise((resolve, reject) => {
+        sqs.receiveMessage(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve(data)
+        })
       })
     }
   )
@@ -139,12 +153,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'deleteMessage'
     },
     async (req) => {
-      sqs.deleteMessage(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return data
+      return new Promise((resolve, reject) => {
+        sqs.deleteMessage(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve(data)
+        })
       })
     }
   )
@@ -155,12 +171,14 @@ function hemeraSQS (hemera, opts, done) {
       cmd: 'changeMessageVisibility'
     },
     async (req) => {
-      sqs.changeMessageVisibility(req.params, (err, data) => {
-        if (err) {
-          this.log.error(err)
-          return new Error(err)
-        }
-        return data
+      return new Promise((resolve, reject) => {
+        sqs.changeMessageVisibility(req.params, (err, data) => {
+          if (err) {
+            this.log.error(err)
+            return reject(new Error(err))
+          }
+          return resolve(data)
+        })
       })
     }
   )
